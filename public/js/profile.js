@@ -1,5 +1,5 @@
-// const newFormHandler = async (event) => {
-//     event. preventDefault();
+const newFormHandler = async (event) => {
+    event. preventDefault();
 
-//     const name = document.querySelector()
-// }
+    const name = document.querySelector()
+}

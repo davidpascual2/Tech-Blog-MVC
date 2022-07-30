@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const userRoutes = require('./userRoutes'); //userRoutes come from file name
+const userRoutes = require('./userRoutes'); //userRoutes come from file name 'userRoutes.js'
 const postRoutes = require('./postRoutes');
 const commentRoutes = require('./commentRoutes')
 
