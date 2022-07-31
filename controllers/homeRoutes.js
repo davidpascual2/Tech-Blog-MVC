@@ -103,7 +103,7 @@ router.get('/profile', async (req, res) => {
 // login route
 router.get('/login', (req, res) => {
     if(req.session.loggedIn) {
-        res.redirect('/'); // '/' OR 'Profile'??????
+        res.redirect('/profile'); // '/' OR 'Profile'??????
         return;
     }
     
@@ -112,14 +112,14 @@ router.get('/login', (req, res) => {
 
 //=================ADD POST================//
 
-router.get('/new', (req, res) => {
+router.get('/new-post', (req, res) => {
     res.render('new-post');
 });
 
 //===========Get NEW POST============//
 
-router.get('/newpost', (req, res) => {
-    res.render('newpost')
+router.get('/profile/new-post', (req, res) => {
+    res.render('new-post')
 });
 
 module.exports = router;

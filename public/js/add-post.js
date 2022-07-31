@@ -1,14 +1,14 @@
 const newFormHandler = async (event) => {
     event.preventDefault(); 
 
-    const title = document.querySelector('input[name="post-title"]').value; //add correct variable
-    const content = document.querySelector('input[name="post-title"]').value; // add correct variable
+    const title = document.querySelector('#post-title').value.trim(); //add correct variable
+    const post_text = document.querySelector('#post-content').value.trim(); // add correct variable
 
     const response = await fetch('/api/posts', {
         method: 'POST',
         body: JSON.stringify({
             title,
-            content
+            post_text
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -22,4 +22,4 @@ const newFormHandler = async (event) => {
     }
 };
 
-document.querySelector('#new-post-form').addEventListener('submit', newFormHandler)
+document.querySelector('.btn').addEventListener('submit', newFormHandler)
