@@ -110,4 +110,16 @@ router.get('/login', (req, res) => {
     res.render('login');
 })
 
+//=================ADD POST================//
+
+router.get('/new', (req, res) => {
+    res.render('new-post');
+});
+
+//===========Get NEW POST============//
+
+router.get('/newpost', (req, res) => {
+    res.render('newpost')
+});
+
 module.exports = router;
