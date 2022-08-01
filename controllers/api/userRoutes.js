@@ -5,7 +5,10 @@ const { User } = require('../../models');
 router.post('/', async (req, res) => {
     try {
         console.log(req.body, "req body!!!!")
-        const userData = await User.create(req.body); //why not green, why req.body?
+        const userData = await User.create({
+            username: req.body.username,
+            password: req.body.password,
+        }); //why req.body?
 
         req.session.save(() => {
             req.session.user_id = userData.id; //WHY 'user_id
@@ -22,7 +25,7 @@ router.post('/', async (req, res) => {
 //post login
 router.post('/login', async (req, res) => {
     try {
-        //email 
+        //username 
         const userData = await User.findOne({ where: { username: req.body.username } });
         
         if(!userData) {

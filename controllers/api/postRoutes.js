@@ -45,6 +45,26 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    try{
+        const updatePost = await Post.update({
+            ...req.body //??
+        },
+        {
+            where: { //??
+                id: req.params.id //??
+            }
+        });
+
+        if(!updatePost) {
+            res.status(404).json({ message: 'no post with this ID'})
+        }
+        res.status(200).json(updatePost)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
 
 //Delete Post
 router.get('/:id', async (req,res) => {
