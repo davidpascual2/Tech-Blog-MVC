@@ -3,7 +3,7 @@ const signupButton = document.querySelector('#signup-button')
 
 const loginFormHandler = async (event) => {
     event.preventDefault(); 
-
+    
     //collect values from login form 
     const username = document.querySelector('#username-login').value.trim(); //username?
     const password = document.querySelector('#password-login').value.trim();
@@ -21,6 +21,8 @@ const loginFormHandler = async (event) => {
           } else {
             alert(response.statusText);
           }
+    } else {
+      alert('Please enter valid email/password')
     }
 }
 
@@ -43,6 +45,8 @@ const signupFormHandler = async (event) => {
     } else {
       alert(response.statusText)
     }
+  } else {
+    alert('Please enter valid email/password')
   }
 };
 
