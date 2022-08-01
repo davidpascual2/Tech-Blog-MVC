@@ -4,21 +4,23 @@ const newFormHandler = async (event) => {
     const title = document.querySelector('#post-title').value.trim(); //add correct variable
     const post_text = document.querySelector('#post-content').value.trim(); // add correct variable
 
-    const response = await fetch('/api/posts', {
-        method: 'POST',
-        body: JSON.stringify({
-            title,
-            post_text
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    if(title && post_text) {
+        const response = await fetch('/api/posts', {
+            method: 'POST',
+            body: JSON.stringify({
+                title: title,
+                post_text: post_text
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-    if (response.ok) {
-        document.location.replace('/profile');
-    } else {
-        alert(response.statusText);
+        if (response.ok) {
+            document.location.replace('/profile');
+        } else {
+            alert(response.statusText);
+        }
     }
 };
 

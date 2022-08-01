@@ -2,6 +2,35 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
+
+//Get Post by id
+router.get('/:id', async (req, res) => {
+    try {
+        const postData = await Post.findbyPK(req.params.id, {
+            include: [
+                {
+                    model: Comment, // this gets any comments made on post
+                    attributes: ['comment_text'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                },
+                
+                {  
+                    model: User, //this shows the post creator
+                    attributes: ['username']
+                }
+            ]
+        });
+        if(!postData) {
+            res.status(404).json({ message: 'no post found with that ID'})
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 //CREATE new Post
 router.post('/', async (req,res) => {
     try {
@@ -17,33 +46,6 @@ router.post('/', async (req,res) => {
 })
 
 
-//Get Post by id
-router.get('/:id', async (req, res) => {
-    try {
-        const postData = await Post.findbyPK(req.params.id, {
-            include: [
-                {
-                    model: Comment, //??????????????
-                    attributes: ['comment_text'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                //whats this for???????
-                {  
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        });
-        if(!postData) {
-            res.status(404).json({ message: 'no post found with that ID'})
-        }
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
 
 router.put('/:id', async (req, res) => {
     try{
@@ -67,7 +69,7 @@ router.put('/:id', async (req, res) => {
 
 
 //Delete Post
-router.get('/:id', async (req,res) => {
+router.delete('/:id', async (req,res) => {
     try{
         const deletePost = await Post.destroy({
             where: {

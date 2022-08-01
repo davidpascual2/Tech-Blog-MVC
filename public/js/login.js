@@ -11,7 +11,7 @@ const loginFormHandler = async (event) => {
     if (username && password) { //username?
         const response = await fetch('/api/users/login', { //references api > index > userRoutes
             method: 'POST',
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ username: username, password: password }),
             headers: {'Content-Type': 'application/json'}
         });
 
@@ -34,7 +34,7 @@ const signupFormHandler = async (event) => {
   if(username && password) { //email
     const response = await fetch('/api/users', { //references api > index > userRoutes
       method: 'POST',
-      body: JSON.stringify({ username, password}), //email
+      body: JSON.stringify({ username:username, password: password}), //email
       headers: { 'Content-Type': 'application/json' },
     });
 
