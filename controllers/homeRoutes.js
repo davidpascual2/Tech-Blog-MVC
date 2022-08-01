@@ -90,7 +90,7 @@ router.get('/profile', async (req, res) => {
         const user = userData.get({ plain: true });
             console.log("hey")
         res.render('profile', {
-            ...user, //removed elipses
+            ...user, // what does elipses do?
             loggedIn: true
         });
     } catch (err) {
@@ -140,9 +140,9 @@ router.get('/login', (req, res) => {
 
 //=================ADD POST================//
 
-router.get('/new-post', (req, res) => {
-    res.render('new-post');
-});
+// router.get('/new-post', (req, res) => {
+//     res.render('new-post');
+// });
 
 //===========Get NEW POST============//
 
