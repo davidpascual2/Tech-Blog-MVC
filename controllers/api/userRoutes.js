@@ -8,14 +8,14 @@ router.post('/', async (req, res) => {
         const userData = await User.create({
             username: req.body.username,
             password: req.body.password,
-        }); //why req.body?
+        }); 
 
         req.session.save(() => {
             req.session.user_id = userData.id; //WHY 'user_id
             req.session.loggedIn = true; // loggedIn
 
             res.status(200).json(userData)
-        })
+        });
     } catch (err) {
         console.log(err);
         res.status(400).json(err);
@@ -64,3 +64,5 @@ router.post('/logout', (req, res) => {
 });
 
 module.exports = router;
+
+

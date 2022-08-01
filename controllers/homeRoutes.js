@@ -23,11 +23,7 @@ router.get('/', async (req, res) => {
         });
 
         //checks to make sure user is logged in?
-        res.render('homepage', {
-            posts,
-            loggedIn: req.session.loggedIn, //loggedIn
-        });
-
+        res.render('homepage', { posts, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -82,6 +78,8 @@ router.get('/comment/:id', async (req, res) => {
     }
 });
 
+//==================GET PROFILE===================//
+
 router.get('/profile', async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
@@ -90,15 +88,43 @@ router.get('/profile', async (req, res) => {
         });
 
         const user = userData.get({ plain: true });
-
+            console.log("hey")
         res.render('profile', {
-            ...user,
+            ...user, //removed elipses
             loggedIn: true
         });
     } catch (err) {
         res.status(500).json(err);
     }
 });
+
+// router.get('/profile', async (req, res) => {
+//     try {
+//         const postData = await Post.findAll({
+//             include: [
+//                 {
+//                     model: User,
+//                     attributes: ['username']
+//                 },
+//             ],
+//             where: {
+//                 user_id: req.session.user_id
+//             }
+//         });
+
+//         const posts = postData.map((Post) =>Post.get({ plain: true } ));
+    
+
+//         res.render('profile', {
+//             posts,
+//             loggedIn: true
+//         });
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
+//=======================LOGIN=========================//
 
 // login route
 router.get('/login', (req, res) => {
@@ -107,8 +133,10 @@ router.get('/login', (req, res) => {
         return;
     }
     
-    res.render('login');
-})
+    res.render('login', { //ADDED
+        loggedIn: req.session.loggedIn
+    });
+});
 
 //=================ADD POST================//
 
