@@ -39,12 +39,15 @@ router.post('/login', async (req, res) => {
             res.status(400).json({ message: 'invalid username or password'});
             return;
         }
-
+        console.log('!!!!!!!!!!')
+        console.log(userData)
         req.session.save(() => {
+        
             req.session.user_id = userData.id;
-            req.session.loggedIn = true; //LoggedIn or Logged_in????????????
-
+            req.session.loggedIn = true; 
+            console.log(req.session)
             res.json({ user: userData, message: 'You are now logged in'});
+            
         });
 
     } catch (err) {

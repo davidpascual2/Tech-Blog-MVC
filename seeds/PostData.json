@@ -1,6 +1,12 @@
 [
     {
         "title": "Title",
-        "post_text": "Here ss my post!"
+        "post_text": "Here ss my post!",
+        "user_id": "1"
+    },
+    {
+        "title": "tech stuff",
+        "post_text": "this is some good content",
+        "user_id": "2"
     }
 ]

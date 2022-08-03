@@ -3,10 +3,9 @@ const { Comment, Post, User } = require('../models');
 // const User = require('../models/User');
 
 //import custom middleware
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
-
-//GET all Posts
+//===============GET all Posts====================//
 router.get('/', async (req, res) => {
     try{
         const postData = await Post.findAll({
@@ -17,7 +16,7 @@ router.get('/', async (req, res) => {
                 },
             ],
         });
-
+        //serialize data so template can read it
         const posts = postData.map((post) => {
             post.get({ plain: true })
         });
@@ -29,6 +28,34 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+//===============GET ONE POST================//
+// router.get('/post/:id', async (req, res) => {
+//     try {
+//         const postData = await Post.findByPk(req.params.id, {
+//             include: [
+//                 {
+//                     model: Comment, // this gets any comments made on post
+//                     attributes: ['comment_text'],
+//                     include: {
+//                         model: User,
+//                         attributes: ['username']
+//                     }
+//                 },
+                
+//                 {  
+//                     model: User, //this shows the post creator
+//                     attributes: ['username']
+//                 }
+//             ]
+//         });
+//         if(!postData) {
+//             res.status(404).json({ message: 'no post found with that ID'})
+//         }
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 //Get one post
 router.get('/post/:id', async (req, res) => { // add with auth
@@ -63,7 +90,7 @@ router.get('/post/:id', async (req, res) => { // add with auth
     }
 });
 
-//GET One comment, you do not get ALL comments because it is nested within Post???
+//=================GET One comment==================// you do not get ALL comments because it is nested within Post???
 router.get('/comment/:id', async (req, res) => { 
     try {
         const commentData = await Comment.findByPk(req.params.id) //only used when searching by id?
@@ -81,19 +108,21 @@ router.get('/comment/:id', async (req, res) => {
 //==================GET PROFILE===================//
 
 router.get('/profile', async (req, res) => {
+    console.log(req.session)
     try {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: {exclude: ['password'] },
             include: [{ model: Post }],
         });
-
+        console.log(req.session.user_id)
         const user = userData.get({ plain: true });
-            console.log("hey")
+
         res.render('profile', {
             ...user, // what does elipses do?
             loggedIn: true
         });
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
 });
@@ -117,9 +146,10 @@ router.get('/profile', async (req, res) => {
 
 //         res.render('profile', {
 //             posts,
-//             loggedIn: true
+//             loggedIn: req.session.loggedIn
 //         });
 //     } catch (err) {
+//         console.log(err)
 //         res.status(500).json(err);
 //     }
 // });
@@ -133,10 +163,18 @@ router.get('/login', (req, res) => {
         return;
     }
     
-    res.render('login', { //ADDED
-        loggedIn: req.session.loggedIn
-    });
+    res.render('login');
 });
+
+// router.get('/signup', (req, res) => {
+//     if(req.session.loggedIn) {
+//         res.redirect('/profile'); // '/' OR 'Profile'??????
+//         return;
+//     }
+    
+//     res.render('login');
+// });
+
 
 //=================ADD POST================//
 
@@ -144,7 +182,7 @@ router.get('/login', (req, res) => {
 //     res.render('new-post');
 // });
 
-//===========Get NEW POST============//
+// //===========Get NEW POST============//
 
 router.get('/profile/new-post', (req, res) => {
     res.render('new-post')

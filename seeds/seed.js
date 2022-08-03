@@ -1,8 +1,9 @@
-const sequelize = require('../config/connection');
 const { User, Post } = require('../models'); //why no comment????
 
 const userData = require('./userData.json');
 const postData = require('./postData.json');
+
+const sequelize = require('../config/connection');
 
 
 const seedDatabase = async () => {
