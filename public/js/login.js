@@ -39,7 +39,7 @@ const signupFormHandler = async (event) => {
       body: JSON.stringify({ username: username, password: password }), //email
       headers: { 'Content-Type': 'application/json' },
     });
-
+    console.log(await response.json())
     if (response.ok) {
       document.location.replace('/profile');
     } else {

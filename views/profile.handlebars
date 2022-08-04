@@ -1,4 +1,4 @@
-{{#if posts.length}}
+{{!-- {{#if posts.length}}
 <div class="container">
   <h2>Your Posts</h2>
     {{#each posts as |post|}}
@@ -6,9 +6,24 @@
     {{/each}}
     
 </div>
-{{/if}}
+{{/if}} --}}
+<div class="container">
+  {{#each posts as |post|}}
+  <div class="container-md border border-3 d-flex justify-content-between mb-2">
+    <h5><a href="/edit/{{post.id}}">{{post.title}}</a></h5>
+    <p>{{format_date post.date_created}}</p>
+  </div>
+  {{/each}}
 
-<button type="submit" class="btn"><a class="link" href="/profile/new-post">+ New Post</a></button>
+  <div class="row mt-4">
+    <a class="link btn btn-primary" href="/new-post">+ New Post</a>
+  </div>
+</div>
+  
 
-<script src="/public/js/add-post.js"></script>
+
+
+{{!-- <button type="submit" class="btn"><a class="link" href="/profile/new-post">+ New Post!</a></button> --}}
+
+{{!-- <script src="/public/js/add-post.js"></script> --}}
 

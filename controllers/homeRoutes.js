@@ -176,16 +176,16 @@ router.get('/login', (req, res) => {
 // });
 
 
-//=================ADD POST================//
+//=================GET NEW POST================//
 
-// router.get('/new-post', (req, res) => {
-//     res.render('new-post');
-// });
+router.get('/new-post', (req, res) => {
+    res.render('new-post');
+});
 
 // //===========Get NEW POST============//
 
-router.get('/profile/new-post', (req, res) => {
-    res.render('new-post')
-});
+// router.get('/profile/new-post', (req, res) => {
+//     res.render('new-post')
+// });
 
 module.exports = router;
