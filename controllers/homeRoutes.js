@@ -3,7 +3,7 @@ const { Comment, Post, User } = require('../models');
 // const User = require('../models/User');
 
 //import custom middleware
-const withAuth = require('../utils/auth');
+// const withAuth = require('../utils/auth');
 
 //===============GET all Posts====================//
 router.get('/', async (req, res) => {
@@ -18,10 +18,9 @@ router.get('/', async (req, res) => {
         });
         //serialize data so template can read it
         const posts = postData.map((post) => {
-            post.get({ plain: true })
+            return post.get({ plain: true })
         });
-
-        //checks to make sure user is logged in?
+        
         res.render('homepage', { posts, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err);
