@@ -3,7 +3,7 @@ const { User, Post, Comment } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 
-// //Get Post by id
+//Get Post by id
 // router.get('/:id', async (req, res) => {
 //     try {
 //         const postData = await Post.findbyPK(req.params.id, {
