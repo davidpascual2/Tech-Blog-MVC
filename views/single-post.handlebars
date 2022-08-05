@@ -11,14 +11,14 @@
 
 {{#if loggedIn}}
 <form id="add-comment-form">
-    <input id="" class="">
-    <button id="comment-button" class="btn btn-secondary" type="submit"></button>
+    <input id="comment_text" class="">
+    <button id="commentButton" class="btn btn-secondary" type="submit">Comment</button>
 </form>
 {{/if}}
 
 {{#each comments as |comment|}}
 <div class="">
-    <p>{{comment.text}}</p>
+    <p>{{comment.comment_text}}</p>
     <p>{{comment.user.username}} {{format_date date_created}}</p>
 </div>
 {{/each}}

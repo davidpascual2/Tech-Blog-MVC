@@ -1,4 +1,4 @@
-const commentButton = document.querySelector('#commentButton');
+ //const commentButton = document.querySelector('#commentButton');
 
 const newCommentHandler = async (event) => {
     event.preventDefault();
@@ -23,4 +23,4 @@ const newCommentHandler = async (event) => {
     }
 };
 
-commentButton.addEventListener('click', newCommentHandler);
+document.querySelector('#add-comment-form').addEventListener('click', newCommentHandler);
