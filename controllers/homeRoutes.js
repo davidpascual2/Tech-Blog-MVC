@@ -63,7 +63,7 @@ router.get('/post/:id', async (req, res) => { // add with auth
             include: [
                 {
                     model: Comment,
-                    attributes: ['comment_text'], //?
+                    // attributes: ['comment_text'], //?
                     include: {
                         model: User,
                         attributes: ["username"]
@@ -78,10 +78,10 @@ router.get('/post/:id', async (req, res) => { // add with auth
 
         const post = postData.get({ plain: true });
         //checks to make sure user is logged in?
-        res.render('post', {
-            post,
+        res.render('single-post', {
+            ...post,
             loggedIn: req.session.loggedIn //loggedIn
-        });
+        })
 
     } catch (err) {
         console.log(err);
@@ -96,7 +96,7 @@ router.get('/comment/:id', async (req, res) => {
 
         const comment = commentData.get({ plain: true });
 
-        res.render('painting', { comment, loggedIn: req.session.loggedIn })
+        res.render('painting', { comment, loggedIn: req.session.loggedIn }) //???????
 
     } catch (err) {
         console.log(err)
@@ -113,6 +113,7 @@ router.get('/profile', async (req, res) => {
             attributes: {exclude: ['password'] },
             include: [{ model: Post }],
         });
+        console.log(userData)
         console.log(req.session.user_id)
         const user = userData.get({ plain: true });
 
