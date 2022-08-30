@@ -184,10 +184,5 @@ router.get('/new-post', (req, res) => {
     })
 });
 
-// //===========Get NEW POST============//
-
-// router.get('/profile/new-post', (req, res) => {
-//     res.render('new-post')
-// });
 
 module.exports = router;
