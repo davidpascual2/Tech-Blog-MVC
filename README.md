@@ -22,7 +22,7 @@ type in your mysql password
 To use the application you must create an account or sign in. once signed in, you can create posts or comment on other users posts. Upon signing out any posts or comments you have made will be stored in a database so if you log in at a different time, you will still have access to your posts. 
 
 ##  Preview
-[Deployed Heroku app]()
+[Deployed Heroku app](https://tech-blog-david.herokuapp.com/)
 
 ![screenshot 1](./assets/Tech-blog-SS1.png)
 ![screenshot 2](./assets/tech-blog-SS2.png)
